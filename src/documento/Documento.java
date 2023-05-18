@@ -1,27 +1,38 @@
 package documento;
 
+import java.util.ArrayList;
+import elemento.Elemento;
+
 public class Documento {
 	private String titulo;
+	private ArrayList<Elemento> elementos;
 	private int tamanho;
+	private int qtdeElementos;
 	
 	public Documento(String titulo, int tamanho) {
 		if (tamanho <= 0) throw new IllegalArgumentException("Tamanho inválido");
-		if (titulo.equals("") || composedOfSpaces(titulo)) throw new IllegalArgumentException("Título vazio");
 		
 		this.titulo = titulo;
+		this.elementos = new ArrayList<Elemento>();
 		this.tamanho = tamanho;
+		this.qtdeElementos = 0;
 	}
 	
 	public Documento(String titulo) {
 		this(titulo, -1);
 	}
 	
-	private boolean composedOfSpaces(String str) {
-		for (int i = 0; i < str.length(); i++) {
-			if (!(str.charAt(i) == ' ')) {
-				return true;
-			}
+	public int getQtdeElementos() {
+		return this.qtdeElementos;
+	}
+	
+	public String[] getDocumento() {
+		String[] stringsElementos = new String[qtdeElementos];
+		
+		for (int i = 0; i < qtdeElementos; i++) {
+			stringsElementos[i] = elementos.get(i).toString();
 		}
-		return false;
+		
+		return stringsElementos;
 	}
 }

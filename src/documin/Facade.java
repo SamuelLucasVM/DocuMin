@@ -10,23 +10,23 @@ public class Facade {
     }
 
     public boolean criarDocumento(String titulo) {
-    	return this.documentoController.criarDocumento(titulo);
+    	return this.documentoController.addDocumento(titulo);
     }
     
     public boolean criarDocumento(String titulo, int tamanhoMaximo) {
-    	
+    	return this.documentoController.addDocumento(titulo, tamanhoMaximo);
     }
     
     public void removerDocumento(String titulo) {
-    	
+    	this.documentoController.removerDocumento(titulo);
     }
     
     public int contarElementos(String titulo) {
-    	
+    	return this.documentoController.getQtdeElementos(titulo);
     }
     
     public String[] exibirDocumento(String titulo) {
-    	
+    	return this.documentoController.getDocumento(titulo);
     }
 
 }

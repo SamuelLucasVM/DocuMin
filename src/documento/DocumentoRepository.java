@@ -1,25 +1,35 @@
 package documento;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DocumentoRepository {
-	private ArrayList<Documento> documentos;
+	private HashMap<String, Documento> documentos;
 	
 	public DocumentoRepository() {
-		this.documentos = new ArrayList<Documento>();
+		this.documentos = new HashMap<String, Documento>();
 	}
 	
-	public boolean add() {
-		Documento doc = new Documento(null);
+	public boolean add(String titulo) {
+		if (documentos.containsKey(titulo)) return false;
 		
-		documentos.add();
+		Documento doc = new Documento(titulo);
+		documentos.put(titulo, doc);
+		return true;
 	}
 	
-	public Documento get() {
+	public boolean add(String titulo, int tamanhoMaximo) {
+		if (documentos.containsKey(titulo)) return false;
 		
+		Documento doc = new Documento(titulo);
+		documentos.put(titulo, doc);
+		return true;
 	}
 	
-	public boolean remove() {
-		
+	public Documento get(String titulo) {
+		return documentos.get(titulo);
+	}
+	
+	public void remove(String titulo) {
+		documentos.remove(titulo);
 	}
 }
