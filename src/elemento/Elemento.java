@@ -7,6 +7,12 @@ public class Elemento {
 	private String valor;
 	private HashMap<String, String> propriedades;
 	
+	public Elemento(int prioridade, String valor, HashMap<String, String> propriedades) {
+		this.prioridade = prioridade;
+		this.valor = valor;
+		this.propriedades = propriedades;
+	}
+	
 	public String exibirCompleto() {
 		
 		return ;
