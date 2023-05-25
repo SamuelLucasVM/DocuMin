@@ -1,5 +1,6 @@
 package elemento;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Termos extends Elemento{
@@ -42,21 +43,15 @@ public class Termos extends Elemento{
 	private String[] splitedTermos(String str, String separador, String ordem) {
 		String[] termos = str.split(separador);
 		
-		String[] response = new String[termos.length];
 		switch (ordem) {
-		case "NENHUM": {
-			response = termos;
-		}
-		
 		case "ALFABETICA": {
-			
+			Arrays.sort(termos);
 		}
-		
 		case "TAMANHO": {
-			
+			Arrays.sort(termos, (a, b) -> Integer.compare(a.length(), b.length()));
 		}
 		}
-		
-		return response;
+	
+		return termos;
 	}
 }
