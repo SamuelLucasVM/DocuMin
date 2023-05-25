@@ -9,13 +9,25 @@ public class Lista extends Elemento{
 	
 	@Override
 	public String exibirCompleto() {
-		String response = 
+		String response = preparaCompleto(valor);
 		return response;
 	}
 	
 	@Override
 	public String exibirResumido() {
-		String response = 
+		String response = valor;
 		return response;
+	}
+	
+	private String preparaCompleto(String str) {
+		String parts[] = str.split(propriedades.get("separador"));
+		
+		String splited = "";
+		
+		for (String part : parts) {
+			splited += propriedades.get("charLista") + " " + part + "\n";
+		}
+		
+		return splited;
 	}
 }

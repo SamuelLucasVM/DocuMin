@@ -35,6 +35,26 @@ public class ElementoController {
 		return(repositorio.add(lista));
 	}
 	
+	public int addTermos(String tituloDoc, String valorTermos, int prioridade, String separador, Ordem ordem) {
+		HashMap<String, String> propriedades = new HashMap<String, String>();
+		propriedades.put("separador", separador);
+		switch (ordem) {
+		case NENHUM: {
+			propriedades.put("ordem", "NENHUM");
+			}
+		case ALFABETICA: {
+			propriedades.put("ordem", "ALFABETICA");			
+			}
+		case TAMANHO: {
+			propriedades.put("ordem", "TAMANHO");
+			}
+		}
+		
+		Termos termo = new Termos(prioridade, valorTermos, propriedades);
+		
+		return(repositorio.add(termo));
+	}
+	
 	public void elevaElemento(int elementoPosicao) {
 		repositorio.elevaElemento(elementoPosicao);
 	}
