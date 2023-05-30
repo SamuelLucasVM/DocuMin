@@ -68,4 +68,24 @@ public class Facade {
     public int criarAtalho(String tituloDoc, String tituloDocReferenciado) {
     	return this.documentoController.addAtalho(tituloDoc, tituloDocReferenciado);
     }
+    
+    public int criarVisaoCompleta(String tituloDoc) {
+    	
+    }
+    
+    public int criarVisaoResumida(String tituloDoc) {
+    	
+    }
+    
+    public int criarVisaoPrioritaria(String tituloDoc, int prioridade) {
+    	
+    }
+    
+    public int criarVisaoTitulo(String tituloDoc) {
+    	
+    }
+    
+    public String[] exibirVisao(int visaoId) {
+    	
+    }
 }
