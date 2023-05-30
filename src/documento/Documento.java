@@ -15,6 +15,7 @@ public class Documento {
 	ArrayList<Elemento> elementos;
 	private int tamanho;
 	private int qtdeElementos;
+	boolean haveDoc;
 	
 	public Documento(String titulo, int tamanho) {
 		if (tamanho <= 0) throw new IllegalArgumentException("Tamanho inválido");
@@ -23,6 +24,7 @@ public class Documento {
 		this.elementos = new ArrayList<Elemento>();
 		this.tamanho = tamanho;
 		this.qtdeElementos = 0;
+		this.haveDoc = false;
 	}
 	
 	public Documento(String titulo) {
@@ -44,6 +46,8 @@ public class Documento {
 	}
 	
 	public int addTexto(String valor, int prioridade) {
+		if (elementos.size() == tamanho) throw new IndexOutOfBoundsException("Tamanho limite atingido");
+		
 		Texto texto = new Texto(prioridade, valor);
 		elementos.add(texto);
 		
@@ -51,6 +55,8 @@ public class Documento {
 	}
 	
 	public int addTitulo(String valor, int prioridade, int nivel, boolean linkavel) {
+		if (elementos.size() == tamanho) throw new IndexOutOfBoundsException("Tamanho limite atingido");
+		
 		HashMap<String, String> propriedades = new HashMap<String, String>();
 		propriedades.put("nivel", Integer.toString(nivel));
 		propriedades.put("linkavel", Boolean.toString(linkavel));
@@ -62,6 +68,8 @@ public class Documento {
 	}
 	
 	public int addLista(String valorLista, int prioridade, String separador, String charLista) {
+		if (elementos.size() == tamanho) throw new IndexOutOfBoundsException("Tamanho limite atingido");
+		
 		HashMap<String, String> propriedades = new HashMap<String, String>();
 		propriedades.put("separador", separador);
 		propriedades.put("charLista", charLista);
@@ -73,6 +81,8 @@ public class Documento {
 	}
 	
 	public int addTermos(String tituloDoc, String valorTermos, int prioridade, String separador, String ordem) {
+		if (elementos.size() == tamanho) throw new IndexOutOfBoundsException("Tamanho limite atingido");
+		
 		HashMap<String, String> propriedades = new HashMap<String, String>();
 		propriedades.put("separador", separador);
 		propriedades.put("ordem", ordem);
@@ -123,10 +133,18 @@ public class Documento {
 	}
 	
 	public int addAtalho(int prioridade, String valor, HashMap<String, String> propriedades) {
+		if (elementos.size() == tamanho) throw new IndexOutOfBoundsException("Tamanho limite atingido");
+		
+		haveDoc = true;
+		
 		Atalho atalho = new Atalho(prioridade, valor, propriedades);
 		
 		elementos.add(atalho);
 		
 		return elementos.size();
+	}
+	
+	public boolean haveDoc() {
+		return haveDoc;
 	}
 }

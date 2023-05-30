@@ -14,7 +14,7 @@ public class DocumentoController {
 	
 	public boolean addDocumento(String titulo) {
 		if (composedOfSpaces(titulo) || titulo == "") throw new IllegalArgumentException("Título vazio");
-
+		
 		return(repositorio.add(titulo));
 	}
 	
@@ -47,12 +47,15 @@ public class DocumentoController {
 	}
 	
 	public int addAtalho(String tituloDoc, String tituloDocReferenciado) {
+		if (repositorio.get(tituloDoc).haveDoc()) throw new IllegalStateException("Documento possui atalho");
+		
 		Documento docReferenciado = getDocumento(tituloDocReferenciado);
 		
 		int prioridade = getMediaPrioridades(docReferenciado.getElementos());
 		String valor = tituloDocReferenciado;
 		HashMap<String, String> propriedades = new HashMap<String, String>();
-		propriedades["representacaoCompleta"] = criaRepresentacaoCompletaAtalho(docReferenciado.getElementos());
+		propriedades.put("representacaoCompleta", criaRepresentacaoCompletaAtalho(docReferenciado.getElementos()));
+		propriedades.put("representacaoResumido", criaRepresentacaoResumidaAtalho(docReferenciado.getElementos()));
 		
 		return getDocumento(tituloDoc).addAtalho(prioridade, valor, propriedades);
 	}
@@ -83,7 +86,19 @@ public class DocumentoController {
 		
 		for (Elemento elemento : elementos) {
 			if (elemento.getPrioridade() == 4 || elemento.getPrioridade() == 5) {
-				response += elemento.exibirCompleto() += " ";
+				response += elemento.exibirCompleto() + "\n";
+			}
+		}
+		
+		return response;
+	}
+	
+	private String criaRepresentacaoResumidaAtalho(ArrayList<Elemento> elementos) {
+		String response = "";
+		
+		for (Elemento elemento : elementos) {
+			if (elemento.getPrioridade() == 4 || elemento.getPrioridade() == 5) {
+				response += elemento.exibirResumido() + "\n";
 			}
 		}
 		
