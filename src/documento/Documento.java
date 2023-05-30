@@ -3,6 +3,7 @@ package documento;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import elemento.Atalho;
 import elemento.Elemento;
 import elemento.Lista;
 import elemento.Termos;
@@ -110,10 +111,22 @@ public class Documento {
 		return elementos.get(posicao);
 	}
 	
+	public ArrayList<Elemento> getElementos() {
+		return elementos;
+	}
+	
 	public boolean removeElemento(int posicao) {
 		if (posicao < 0 || posicao >= elementos.size()) return false;
 		
 		elementos.remove(posicao);
 		return true;
+	}
+	
+	public int addAtalho(int prioridade, String valor, HashMap<String, String> propriedades) {
+		Atalho atalho = new Atalho(prioridade, valor, propriedades);
+		
+		elementos.add(atalho);
+		
+		return elementos.size();
 	}
 }

@@ -20,4 +20,8 @@ public abstract class Elemento implements Exibicionista{
 	public HashMap<String, String> getPropriedades() {
 		return propriedades;
 	}
+	
+	public int getPrioridade() {
+		return prioridade;
+	}
 }
