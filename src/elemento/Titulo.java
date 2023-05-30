@@ -10,13 +10,13 @@ public class Titulo extends Elemento{
 	@Override
 	public String exibirCompleto() {
 		String response;
-		if (propriedades.get("linkavel").equals("true")) {
-			String link = linkaValor(valor);
+		if (super.getPropriedades().get("linkavel").equals("true")) {
+			String link = linkaValor(super.getValor());
 			
-			response = propriedades.get("nivel") + ". " + valor + " -- " + link;
+			response = super.getPropriedades().get("nivel") + ". " + super.getValor() + " -- " + link;
 		}
 		else {
-			response = propriedades.get("nivel") + ". " + valor;
+			response = super.getPropriedades().get("nivel") + ". " + super.getValor();
 		}
 		
 		return response;
@@ -24,7 +24,7 @@ public class Titulo extends Elemento{
 	
 	@Override
 	public String exibirResumido() {
-		String response = propriedades.get("nivel") + ". " + valor;
+		String response = super.getPropriedades().get("nivel") + ". " + super.getValor();
 		return response;
 	}
 	

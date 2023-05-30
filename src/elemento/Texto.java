@@ -7,11 +7,11 @@ public class Texto extends Elemento{
 	
 	@Override
 	public String exibirCompleto() {
-		return valor;
+		return super.getValor();
 	}
 	
 	@Override
 	public String exibirResumido() {
-		return valor;
+		return super.getValor();
 	}
 }

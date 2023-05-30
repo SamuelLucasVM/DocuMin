@@ -31,10 +31,14 @@ public class DocumentoController {
 		return repositorio.get(titulo).getQtdeElementos();
 	}
 	
-	public String[] getDocumento(String titulo) {
+	public String[] exibirDocumento(String titulo) {
 		if (composedOfSpaces(titulo) || titulo == "") throw new IllegalArgumentException("Título vazio");
 		
 		return repositorio.get(titulo).getDocumento();
+	}
+	
+	public Documento getDocumento(String titulo) {
+		return repositorio.get(titulo);
 	}
 	
 	private boolean composedOfSpaces(String str) {

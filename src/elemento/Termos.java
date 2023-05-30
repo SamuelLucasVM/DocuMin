@@ -10,8 +10,8 @@ public class Termos extends Elemento{
 	
 	@Override
 	public String exibirCompleto() {
-		int qtdeTermos = getQtdeTermos(valor, propriedades.get("separador"));
-		String[] termos = splitedTermos(valor, propriedades.get("separador"), propriedades.get("ordem"));
+		int qtdeTermos = getQtdeTermos(super.getValor(), super.getPropriedades().get("separador"));
+		String[] termos = splitedTermos(super.getValor(), super.getPropriedades().get("separador"), super.getPropriedades().get("ordem"));
 		
 		String response = "Total de Termos: " + qtdeTermos + "\n" + "- ";
 		
@@ -24,11 +24,11 @@ public class Termos extends Elemento{
 	
 	@Override
 	public String exibirResumido() {
-		String[] termos = splitedTermos(valor, propriedades.get("separador"), propriedades.get("ordem"));
+		String[] termos = splitedTermos(super.getValor(), super.getPropriedades().get("separador"), super.getPropriedades().get("ordem"));
 		String response = "";
 
 		for (String termo : termos) {
-			response += termo + " " + propriedades.get("separador") + " ";
+			response += termo + " " + super.getPropriedades().get("separador") + " ";
 		}
 		
 		return response;
