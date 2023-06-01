@@ -1,9 +1,11 @@
 package documin;
 
 import documento.DocumentoController;
+import visao.VisaoController;
 
 public class Facade {
     private DocumentoController documentoController;
+    private VisaoController visaoController;
 
     public Facade() {
         this.documentoController = new DocumentoController();
@@ -70,22 +72,22 @@ public class Facade {
     }
     
     public int criarVisaoCompleta(String tituloDoc) {
-    	
+    	return this.visaoController.criarVisaoCompleta(tituloDoc, documentoController);
     }
     
     public int criarVisaoResumida(String tituloDoc) {
-    	
+    	return this.visaoController.criarVisaoResumida(tituloDoc, documentoController);	
     }
     
     public int criarVisaoPrioritaria(String tituloDoc, int prioridade) {
-    	
+    	return this.visaoController.criarVisaoPrioritaria(tituloDoc, prioridade, documentoController);
     }
     
     public int criarVisaoTitulo(String tituloDoc) {
-    	
+    	return this.visaoController.criarVisaoTitulo(tituloDoc, documentoController);
     }
     
     public String[] exibirVisao(int visaoId) {
-    	
+    	return this.visaoController.exibirVisao(visaoId);
     }
 }
