@@ -44,7 +44,7 @@ public class Facade {
     }
     
     public int criarTermos(String tituloDoc, String valorTermos, int prioridade, String separador, String ordem) {
-    	return this.documentoController.getDocumento(tituloDoc).addTermos(tituloDoc, valorTermos, prioridade, separador, ordem);
+    	return this.documentoController.getDocumento(tituloDoc).addTermos(valorTermos, prioridade, separador, ordem);
     }
     
     public String pegarRepresentacaoCompleta(String tituloDoc, int elementoPosicao) {

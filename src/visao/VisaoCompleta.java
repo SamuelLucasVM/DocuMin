@@ -6,7 +6,7 @@ import documento.Documento;
 import elemento.Elemento;
 
 public class VisaoCompleta implements Visao {
-	Documento documento;
+	private Documento documento;
 	
 	public VisaoCompleta(Documento documento) {
 		this.documento = documento;

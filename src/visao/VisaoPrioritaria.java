@@ -6,8 +6,8 @@ import documento.Documento;
 import elemento.Elemento;
 
 public class VisaoPrioritaria implements Visao {
-	int prioridadeBase; 
-	Documento documento;
+	private int prioridadeBase; 
+	private Documento documento;
 	
 	public VisaoPrioritaria(int prioridadeBase, Documento documento) {
 		this.documento = documento;

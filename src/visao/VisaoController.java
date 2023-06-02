@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import documento.DocumentoController;
-import documento.DocumentoRepository;
 
 public class VisaoController {
-	DocumentoRepository repositorioDocumentos;
-	List<Visao> visoes;
+	private List<Visao> visoes;
 	
 	public VisaoController() {
 		visoes = new ArrayList<>();

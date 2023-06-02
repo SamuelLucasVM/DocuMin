@@ -7,7 +7,7 @@ import elemento.Elemento;
 import elemento.Titulo;
 
 public class VisaoTitulo implements Visao {
-	Documento documento;
+	private Documento documento;
 	
 	public VisaoTitulo(Documento documento) {
 		this.documento = documento;

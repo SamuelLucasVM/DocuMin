@@ -1,6 +1,7 @@
 package documento;
 
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 public class DocumentoRepository {
 	private HashMap<String, Documento> documentos;
@@ -26,10 +27,14 @@ public class DocumentoRepository {
 	}
 	
 	public Documento get(String titulo) {
+		if (!documentos.containsKey(titulo)) throw new NoSuchElementException("Elemento não encontrado");
+		
 		return documentos.get(titulo);
 	}
 	
 	public void remove(String titulo) {
+		if (!documentos.containsKey(titulo)) throw new NoSuchElementException("Elemento não encontrado");
+		
 		documentos.remove(titulo);
 	}
 }

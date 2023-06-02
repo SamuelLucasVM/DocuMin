@@ -12,18 +12,14 @@ import elemento.Titulo;
 
 public class Documento {
 	private String titulo;
-	ArrayList<Elemento> elementos;
+	private ArrayList<Elemento> elementos;
 	private int tamanho;
-	private int qtdeElementos;
-	boolean haveDoc;
+	private boolean haveDoc;
 	
 	public Documento(String titulo, int tamanho) {
-		if (tamanho <= 0) throw new IllegalArgumentException("Tamanho inválido");
-		
 		this.titulo = titulo;
 		this.elementos = new ArrayList<Elemento>();
 		this.tamanho = tamanho;
-		this.qtdeElementos = 0;
 		this.haveDoc = false;
 	}
 	
@@ -32,14 +28,14 @@ public class Documento {
 	}
 	
 	public int getQtdeElementos() {
-		return this.qtdeElementos;
+		return this.elementos.size();
 	}
 	
 	public String[] getDocumento() {
 		String[] stringsElementos = new String[elementos.size()];
 		
 		for (int i = 0; i < elementos.size(); i++) {
-			stringsElementos[i] = elementos.get(i).toString();
+			stringsElementos[i] = elementos.get(i).exibirResumido();
 		}
 		
 		return stringsElementos;
@@ -55,6 +51,7 @@ public class Documento {
 	}
 	
 	public int addTitulo(String valor, int prioridade, int nivel, boolean linkavel) {
+		if (nivel <= 0 || nivel > 5) throw new IllegalArgumentException("Nível inválido");
 		if (elementos.size() == tamanho) throw new IndexOutOfBoundsException("Tamanho limite atingido");
 		
 		HashMap<String, String> propriedades = new HashMap<String, String>();
@@ -80,7 +77,8 @@ public class Documento {
 		return elementos.size();
 	}
 	
-	public int addTermos(String tituloDoc, String valorTermos, int prioridade, String separador, String ordem) {
+	public int addTermos(String valorTermos, int prioridade, String separador, String ordem) {
+		if (ordem != "NENHUM" && ordem != "ALFABETICA" && ordem != "TAMANHO") throw new IllegalArgumentException("Ordem não existe");
 		if (elementos.size() == tamanho) throw new IndexOutOfBoundsException("Tamanho limite atingido");
 		
 		HashMap<String, String> propriedades = new HashMap<String, String>();
@@ -102,23 +100,29 @@ public class Documento {
 	}
 	
 	public void elevaElemento(int posicao) {
-		if (posicao > 0) {
+		if (posicao <= 0 || posicao > elementos.size()) throw new IndexOutOfBoundsException("Posição inválida");
+		
+		if (posicao != 1) {
 			Elemento aux = elementos.get(posicao - 1);
-			elementos.set(posicao - 1, elementos.get(posicao));
-			elementos.set(posicao, aux);
+			elementos.set(posicao - 1, elementos.get(posicao - 2));
+			elementos.set(posicao - 2, aux);			
 		}
 	}
 	
 	public void cedeElemento(int posicao) {
-		if (posicao == elementos.size() - 1) {
-			Elemento aux = elementos.get(posicao + 1);
-			elementos.set(posicao + 1, elementos.get(posicao));
-			elementos.set(posicao, aux);
+		if (posicao <= 0 || posicao > elementos.size()) throw new IndexOutOfBoundsException("Posição inválida");
+		
+		if (posicao != elementos.size()) {
+			Elemento aux = elementos.get(posicao);
+			elementos.set(posicao, elementos.get(posicao - 1));
+			elementos.set(posicao - 1, aux);			
 		}
 	}
 	
 	public Elemento getElemento(int posicao) {
-		return elementos.get(posicao);
+		if (posicao <= 0 || posicao > elementos.size()) throw new IndexOutOfBoundsException("Posição inválida");
+		
+		return elementos.get(posicao - 1);
 	}
 	
 	public ArrayList<Elemento> getElementos() {
@@ -126,9 +130,11 @@ public class Documento {
 	}
 	
 	public boolean removeElemento(int posicao) {
-		if (posicao < 0 || posicao >= elementos.size()) return false;
+		if (posicao <= 0 || posicao > elementos.size()) return false;
 		
-		elementos.remove(posicao);
+		elementos.remove(posicao - 1);
+		
+		shiftArray(posicao - 1);
 		return true;
 	}
 	
@@ -146,5 +152,25 @@ public class Documento {
 	
 	public boolean haveDoc() {
 		return haveDoc;
+	}
+	
+	public String getTitulo() {
+		return titulo;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) return false;
+		if (obj.getClass() != this.getClass()) return false;
+		
+		Documento doc = (Documento) obj;
+		
+		return doc.getTitulo().equals(this.getTitulo());
+	}
+	
+	private void shiftArray(int posicao) {
+		for (int i = posicao; i < elementos.size() - 1; i++) {
+			elementos.add(i, elementos.get(i + 1));
+		}
 	}
 }

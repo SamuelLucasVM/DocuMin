@@ -19,6 +19,7 @@ public class DocumentoController {
 	}
 	
 	public boolean addDocumento(String titulo, int tamanhoMaximo) {
+		if (tamanhoMaximo <= 0) throw new IllegalArgumentException("Tamanho inválido");
 		if (composedOfSpaces(titulo) || titulo == "") throw new IllegalArgumentException("Título vazio");
 
 		return(repositorio.add(titulo, tamanhoMaximo));
@@ -43,10 +44,15 @@ public class DocumentoController {
 	}
 	
 	public Documento getDocumento(String titulo) {
+		if (composedOfSpaces(titulo) || titulo == "") throw new IllegalArgumentException("Título vazio");
+		
 		return repositorio.get(titulo);
 	}
 	
 	public int addAtalho(String tituloDoc, String tituloDocReferenciado) {
+		if (composedOfSpaces(tituloDoc) || tituloDoc == "") throw new IllegalArgumentException("Título vazio");
+		if (composedOfSpaces(tituloDocReferenciado) || tituloDocReferenciado == "") throw new IllegalArgumentException("Título vazio");
+		
 		if (repositorio.get(tituloDoc).haveDoc()) throw new IllegalStateException("Documento possui atalho");
 		
 		Documento docReferenciado = getDocumento(tituloDocReferenciado);
@@ -62,11 +68,11 @@ public class DocumentoController {
 	
 	private boolean composedOfSpaces(String str) {
 		for (int i = 0; i < str.length(); i++) {
-			if (!(str.charAt(i) == ' ')) {
-				return true;
+			if (str.charAt(i) != ' ') {
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 	
 	private int getMediaPrioridades(ArrayList<Elemento> elementos) {
@@ -76,7 +82,7 @@ public class DocumentoController {
 			media += elemento.getPrioridade();
 		}
 		
-		media /= elementos.size();
+		media = media != 0 ? media / elementos.size() : 0;
 		
 		return media;
 	}
