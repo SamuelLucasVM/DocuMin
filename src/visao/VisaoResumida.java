@@ -18,7 +18,7 @@ public class VisaoResumida implements Visao {
 		String[] response = new String[elementos.size()];
 		
 		for (int i = 0; i < response.length; i++) {
-			response[i] += elementos.get(i).exibirResumido();
+			response[i] = elementos.get(i).exibirResumido();
 		}
 		
 		return response;

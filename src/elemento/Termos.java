@@ -15,8 +15,11 @@ public class Termos extends Elemento{
 		
 		String response = "Total de Termos: " + qtdeTermos + "\n" + "- ";
 		
-		for (String termo : termos) {
-			response += termo + ", ";
+		for (int i = 0; i < termos.length; i++) {
+			response += termos[i];
+			if (i != termos.length - 1) {
+				response += ", ";
+			}
 		}
 		
 		return response;
@@ -27,8 +30,11 @@ public class Termos extends Elemento{
 		String[] termos = splitedTermos(super.getValor(), super.getPropriedades().get("separador"), super.getPropriedades().get("ordem"));
 		String response = "";
 
-		for (String termo : termos) {
-			response += termo + " " + super.getPropriedades().get("separador") + " ";
+		for (int i = 0; i < termos.length; i++) {
+			response += termos[i];
+			if (i != termos.length - 1) {
+				response += " " + super.getPropriedades().get("separador") + " ";
+			}
 		}
 		
 		return response;
@@ -48,7 +54,7 @@ public class Termos extends Elemento{
 			Arrays.sort(termos);
 		}
 		case "TAMANHO": {
-			Arrays.sort(termos, (a, b) -> Integer.compare(a.length(), b.length()));
+			Arrays.sort(termos, (a, b) -> Integer.compare(b.length(), a.length()));
 		}
 		}
 	

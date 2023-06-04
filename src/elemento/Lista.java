@@ -24,8 +24,11 @@ public class Lista extends Elemento{
 		
 		String splited = "";
 		
-		for (String part : parts) {
-			splited += super.getPropriedades().get("charLista") + " " + part + "\n";
+		for (int i = 0; i < parts.length; i++) {
+			splited += super.getPropriedades().get("charLista") + " " + parts[i];
+			if (i != parts.length - 1) {
+				 splited += "\n";
+			}
 		}
 		
 		return splited;

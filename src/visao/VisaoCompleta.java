@@ -18,9 +18,9 @@ public class VisaoCompleta implements Visao {
 		String[] response = new String[elementos.size()];
 		
 		for (int i = 0; i < response.length; i++) {
-			response[i] += elementos.get(i).exibirCompleto();
+			response[i] = elementos.get(i).exibirCompleto();
 		}
-		
+
 		return response;
 	}
 }

@@ -133,8 +133,7 @@ public class Documento {
 		if (posicao <= 0 || posicao > elementos.size()) return false;
 		
 		elementos.remove(posicao - 1);
-		
-		shiftArray(posicao - 1);
+
 		return true;
 	}
 	
@@ -167,10 +166,5 @@ public class Documento {
 		
 		return doc.getTitulo().equals(this.getTitulo());
 	}
-	
-	private void shiftArray(int posicao) {
-		for (int i = posicao; i < elementos.size() - 1; i++) {
-			elementos.add(i, elementos.get(i + 1));
-		}
-	}
+
 }

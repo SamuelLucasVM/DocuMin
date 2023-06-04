@@ -41,6 +41,8 @@ public class VisaoController {
     }
     
     public String[] exibirVisao(int visaoId) {
-    	return visoes.get(visaoId).exibirVisao();
+    	if (visaoId <= 0 || visaoId > visoes.size()) throw new IndexOutOfBoundsException("Id inválido");
+    	
+    	return visoes.get(visaoId-1).exibirVisao();
     }
 }
