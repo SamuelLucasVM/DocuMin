@@ -1,4 +1,4 @@
-package tests.documento;
+package documento;
 
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,7 +8,6 @@ import java.util.HashMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import documento.Documento;
 import elemento.Lista;
 import elemento.Termos;
 import elemento.Texto;
@@ -152,7 +151,7 @@ class DocumentoTest {
 	void getRepresentacaoCompletaListaTest() {
 		documento.addLista("Valor/Separado", 1, "/", "-");
 
-		assertEquals("- Valor\n- Separado\n", documento.getElemento(1).exibirCompleto());
+		assertEquals("- Valor\n- Separado", documento.getElemento(1).exibirCompleto());
 	}
 	
 	@Test

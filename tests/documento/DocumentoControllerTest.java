@@ -1,4 +1,4 @@
-package tests.documento;
+package documento;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -9,9 +9,6 @@ import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import documento.Documento;
-import documento.DocumentoController;
 
 class DocumentoControllerTest {
 	private DocumentoController controller;

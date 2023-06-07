@@ -24,6 +24,8 @@ public class VisaoTitulo implements Visao {
 			}
 		}
 		
-		return (String[]) response.toArray();
+		String[] finalResponse = response.toArray(new String[0]);
+		
+		return finalResponse;
 	}
 }

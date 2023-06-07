@@ -24,7 +24,9 @@ public class VisaoPrioritaria implements Visao {
 				response.add(elemento.exibirResumido());
 			}
 		}
+
+		String[] finalResponse = response.toArray(new String[0]);
 		
-		return (String[]) response.toArray();
+		return finalResponse;
 	}
 }
