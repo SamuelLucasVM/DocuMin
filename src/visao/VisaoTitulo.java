@@ -15,9 +15,23 @@ import elemento.Titulo;
 public class VisaoTitulo implements Visao {
 	private Documento documento;
 	
+	/**
+	 * Construtor de visaoTitulo que recebe o documento o qual terá seus
+	 * elementos do tipo Titulo representados resumidamente pela visão
+	 * @param documento Documento que terá seus dados utilizados
+	 */
+	
 	public VisaoTitulo(Documento documento) {
 		this.documento = documento;
 	}
+	
+	/**
+	 * Método que retorna a representação do Documento através de um array
+	 * que possui a forma resumida de representar os elementos do tipo titulo 
+	 * do documento
+	 * @return response Array de String com a representação resumida dos
+	 * elementos do tipo Titulo do Documento
+	 */
 	
 	@Override
 	public String[] exibirVisao() {

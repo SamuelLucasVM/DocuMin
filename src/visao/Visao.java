@@ -7,5 +7,13 @@ package visao;
  */
 
 public interface Visao {
+	
+	/**
+	 * Método comum à todos as subclassses de visão, mudando
+	 * seu comportamento mas não sua assinatura
+	 * @return array de String que possuirá a representação
+	 * de elementos do Documento que cada visão terá
+	 */
+	
 	public String[] exibirVisao();
 }

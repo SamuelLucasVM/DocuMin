@@ -1,9 +1,10 @@
 package documento;
 
 /**
- * Classe que gerencia as requisições do sistema para as operações de documentos, 
+ * Classe Controller que gerencia as requisições do sistema para as operações de documentos, 
  * tratando funcionalidades de armazenamento, de requisição de documentos e gerenciando
  * requisições aos métodos de documento.
+ * @author Samuel Lucas Vieira Mato
  */
 
 import java.util.ArrayList;

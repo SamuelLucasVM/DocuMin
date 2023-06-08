@@ -15,13 +15,21 @@ public class VisaoCompleta implements Visao {
 	private Documento documento;
 	
 	/**
-	 * Construtor de visaoCompleta
-	 * @param documento
+	 * Construtor de visaoCompleta que recebe o documento o qual terá seus
+	 * elementos representados completamente pela visão
+	 * @param documento Documento que terá seus dados utilizados
 	 */
 	
 	public VisaoCompleta(Documento documento) {
 		this.documento = documento;
 	}
+	
+	/**
+	 * Método que retorna a representação do Documento através de um array
+	 * que possui a forma completa de representar os elementos desse documento
+	 * @return response Array de String com a representação completa dos
+	 * elementos do Documento
+	 */
 	
 	@Override
 	public String[] exibirVisao() {
