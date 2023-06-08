@@ -1,5 +1,11 @@
 package visao;
 
+/**
+ * Subclasse de visão que retorna a representação completa dos elementos
+ * de documento através do método "exibirVisao".
+ * @author Samuel Lucas Vieira Matos
+ */
+
 import java.util.ArrayList;
 
 import documento.Documento;
@@ -7,6 +13,11 @@ import elemento.Elemento;
 
 public class VisaoCompleta implements Visao {
 	private Documento documento;
+	
+	/**
+	 * Construtor de visaoCompleta
+	 * @param documento
+	 */
 	
 	public VisaoCompleta(Documento documento) {
 		this.documento = documento;

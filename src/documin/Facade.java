@@ -32,39 +32,39 @@ public class Facade {
     }
     
     public int criarTexto(String tituloDoc, String valor, int prioridade) {
-    	return this.documentoController.getDocumento(tituloDoc).addTexto(valor, prioridade);
+    	return this.documentoController.addTextoDocumento(tituloDoc, valor, prioridade);
     }
     
     public int criarTitulo(String tituloDoc, String valor, int prioridade, int nivel, boolean linkavel) {
-    	return this.documentoController.getDocumento(tituloDoc).addTitulo(valor, prioridade, nivel, linkavel);
+    	return this.documentoController.addTituloDocumento(tituloDoc, valor, prioridade, nivel, linkavel);
     }
     
     public int criarLista(String tituloDoc, String valorLista, int prioridade, String separador, String charLista) {
-    	return this.documentoController.getDocumento(tituloDoc).addLista(valorLista, prioridade, separador, charLista);
+    	return this.documentoController.addListaDocumento(tituloDoc, valorLista, prioridade, separador, charLista);
     }
     
     public int criarTermos(String tituloDoc, String valorTermos, int prioridade, String separador, String ordem) {
-    	return this.documentoController.getDocumento(tituloDoc).addTermos(valorTermos, prioridade, separador, ordem);
+    	return this.documentoController.addTermosDocumento(tituloDoc, valorTermos, prioridade, separador, ordem);
     }
     
     public String pegarRepresentacaoCompleta(String tituloDoc, int elementoPosicao) {
-    	return this.documentoController.getDocumento(tituloDoc).getRepresentacaoCompleta(elementoPosicao);
+    	return this.documentoController.getRepresentacaoCompletaDocumento(tituloDoc, elementoPosicao);
     }
     
     public String pegarRepresentacaoResumida(String tituloDoc, int elementoPosicao) {
-    	return this.documentoController.getDocumento(tituloDoc).getRepresentacaoResumida(elementoPosicao);
+    	return this.documentoController.getRepresentacaoResumidaDocumento(tituloDoc, elementoPosicao);
     }
     
     public boolean apagarElemento(String tituloDoc, int elementoPosicao) {
-    	return this.documentoController.getDocumento(tituloDoc).removeElemento(elementoPosicao);
+    	return this.documentoController.removeElementoDocumento(tituloDoc, elementoPosicao);
     }
     
     public void moverParaCima(String tituloDoc, int elementoPosicao) {
-    	this.documentoController.getDocumento(tituloDoc).elevaElemento(elementoPosicao);
+    	this.documentoController.elevaElementoDocumento(tituloDoc, elementoPosicao);
     }
     
     public void moverParaBaixo(String tituloDoc, int elementoPosicao) {
-    	this.documentoController.getDocumento(tituloDoc).cedeElemento(elementoPosicao);
+    	this.documentoController.cedeElementoDocumento(tituloDoc, elementoPosicao);
     }
     
     public int criarAtalho(String tituloDoc, String tituloDocReferenciado) {

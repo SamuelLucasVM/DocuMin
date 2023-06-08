@@ -16,10 +16,10 @@ class VisaoControllerTest {
 		this.documentoController = new DocumentoController();
 		documentoController.addDocumento("Titulo");
 		this.visaoController = new VisaoController();
-		documentoController.getDocumento("Titulo").addTexto("Valor", 4);
-		documentoController.getDocumento("Titulo").addTitulo("Valor", 3, 1, true);
-		documentoController.getDocumento("Titulo").addLista("Valor/Separado", 2, "/", "-");
-		documentoController.getDocumento("Titulo").addTermos("Valor", 1, "/", "NENHUM");
+		documentoController.addTextoDocumento("Titulo", "Valor", 4);
+		documentoController.addTituloDocumento("Titulo", "Valor", 3, 1, true);
+		documentoController.addListaDocumento("Titulo", "Valor/Separado", 2, "/", "-");
+		documentoController.addTermosDocumento("Titulo", "Valor", 1, "/", "NENHUM");
 	}
 	
 	@Test
@@ -64,10 +64,10 @@ class VisaoControllerTest {
     
 	@Test
 	void exibirVisaoCompletaVaziaTest() {
-		documentoController.getDocumento("Titulo").removeElemento(1);
-		documentoController.getDocumento("Titulo").removeElemento(1);
-		documentoController.getDocumento("Titulo").removeElemento(1);
-		documentoController.getDocumento("Titulo").removeElemento(1);
+		documentoController.removeElementoDocumento("Titulo", 1);
+		documentoController.removeElementoDocumento("Titulo", 1);
+		documentoController.removeElementoDocumento("Titulo", 1);
+		documentoController.removeElementoDocumento("Titulo", 1);
 		
 		visaoController.criarVisaoCompleta("Titulo", documentoController);
 		
@@ -86,10 +86,10 @@ class VisaoControllerTest {
 	
 	@Test
 	void exibirVisaoResumidaVaziaTest() {
-		documentoController.getDocumento("Titulo").removeElemento(1);
-		documentoController.getDocumento("Titulo").removeElemento(1);
-		documentoController.getDocumento("Titulo").removeElemento(1);
-		documentoController.getDocumento("Titulo").removeElemento(1);
+		documentoController.removeElementoDocumento("Titulo", 1);
+		documentoController.removeElementoDocumento("Titulo", 1);
+		documentoController.removeElementoDocumento("Titulo", 1);
+		documentoController.removeElementoDocumento("Titulo", 1);
 		
 		visaoController.criarVisaoResumida("Titulo", documentoController);
 		
@@ -108,10 +108,10 @@ class VisaoControllerTest {
 	
 	@Test
 	void exibirVisaoPrioritariaVaziaTest() {
-		documentoController.getDocumento("Titulo").removeElemento(1);
-		documentoController.getDocumento("Titulo").removeElemento(1);
-		documentoController.getDocumento("Titulo").removeElemento(1);
-		documentoController.getDocumento("Titulo").removeElemento(1);
+		documentoController.removeElementoDocumento("Titulo", 1);
+		documentoController.removeElementoDocumento("Titulo", 1);
+		documentoController.removeElementoDocumento("Titulo", 1);
+		documentoController.removeElementoDocumento("Titulo", 1);
 		
 		visaoController.criarVisaoPrioritaria("Titulo", 1, documentoController);
 		
@@ -145,10 +145,10 @@ class VisaoControllerTest {
 	
 	@Test
 	void exibirVisaoTituloVaziaTest() {
-		documentoController.getDocumento("Titulo").removeElemento(1);
-		documentoController.getDocumento("Titulo").removeElemento(1);
-		documentoController.getDocumento("Titulo").removeElemento(1);
-		documentoController.getDocumento("Titulo").removeElemento(1);
+		documentoController.removeElementoDocumento("Titulo", 1);
+		documentoController.removeElementoDocumento("Titulo", 1);
+		documentoController.removeElementoDocumento("Titulo", 1);
+		documentoController.removeElementoDocumento("Titulo", 1);
 		
 		visaoController.criarVisaoTitulo("Titulo", documentoController);
 		
@@ -157,7 +157,7 @@ class VisaoControllerTest {
 	
 	@Test
 	void exibirVisaoTituloSemTitulosTest() {
-		documentoController.getDocumento("Titulo").removeElemento(2);
+		documentoController.removeElementoDocumento("Titulo", 2);
 		
 		visaoController.criarVisaoTitulo("Titulo", documentoController);
 		
@@ -166,7 +166,7 @@ class VisaoControllerTest {
 	
 	@Test
     void exibirVisaoTituloTest() {
-		documentoController.getDocumento("Titulo").addTitulo("Valor2", 3, 2, false);
+		documentoController.addTituloDocumento("Titulo", "Valor2", 3, 2, false);
 		visaoController.criarVisaoTitulo("Titulo", documentoController);
 		
 		assertEquals("1. Valor", visaoController.exibirVisao(1)[0]);

@@ -13,28 +13,28 @@ public class VisaoController {
 	}
 	
     public int criarVisaoCompleta(String tituloDoc, DocumentoController documentoController) {
-    	VisaoCompleta visaoCompleta = new VisaoCompleta(documentoController.getDocumento(tituloDoc));
+    	VisaoCompleta visaoCompleta = new VisaoCompleta(documentoController.acessaDocumento(tituloDoc));
     	visoes.add(visaoCompleta);
     	
     	return visoes.size();
     }
     
     public int criarVisaoResumida(String tituloDoc, DocumentoController documentoController) {
-    	VisaoResumida visaoResumida = new VisaoResumida(documentoController.getDocumento(tituloDoc));
+    	VisaoResumida visaoResumida = new VisaoResumida(documentoController.acessaDocumento(tituloDoc));
     	visoes.add(visaoResumida);
     	
     	return visoes.size();    	
     }
     
     public int criarVisaoPrioritaria(String tituloDoc, int prioridade, DocumentoController documentoController) {
-    	VisaoPrioritaria visaoPrioritaria = new VisaoPrioritaria(prioridade, documentoController.getDocumento(tituloDoc));
+    	VisaoPrioritaria visaoPrioritaria = new VisaoPrioritaria(prioridade, documentoController.acessaDocumento(tituloDoc));
     	visoes.add(visaoPrioritaria);
     	
     	return visoes.size(); 
     }
     
     public int criarVisaoTitulo(String tituloDoc, DocumentoController documentoController) {
-    	VisaoTitulo visaoTitulo = new VisaoTitulo(documentoController.getDocumento(tituloDoc));
+    	VisaoTitulo visaoTitulo = new VisaoTitulo(documentoController.acessaDocumento(tituloDoc));
     	visoes.add(visaoTitulo);
     	
     	return visoes.size(); 

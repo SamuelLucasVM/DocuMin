@@ -1,5 +1,11 @@
 package visao;
 
+/**
+ * Subclasse de visão que retorna a representação resumida dos elementos
+ * do documento do tipo "Titulo" através do método "exibirVisao".
+ * @author Samuel Lucas Vieira Matos
+ */
+
 import java.util.ArrayList;
 
 import documento.Documento;

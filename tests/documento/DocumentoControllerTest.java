@@ -117,9 +117,9 @@ class DocumentoControllerTest {
 	@Test
 	void getQtdeElementosTest() {
 		controller.addDocumento("Titulo1");
-		assertEquals(0, controller.getDocumento("Titulo1").getQtdeElementos());
-		controller.getDocumento("Titulo1").addTexto("Valor", 1);
-		assertEquals(1, controller.getDocumento("Titulo1").getQtdeElementos());
+		assertEquals(0, controller.getQtdeElementosDocumento("Titulo1"));
+		controller.addTextoDocumento("Titulo1", "Valor", 1);
+		assertEquals(1, controller.getQtdeElementos("Titulo1"));
 	}
 	
 	@Test
@@ -157,7 +157,7 @@ class DocumentoControllerTest {
 		controller.addDocumento("Titulo1");
 		assertEquals(0, controller.exibirDocumento("Titulo1").length);
 		
-		controller.getDocumento("Titulo1").addTexto("Valor", 1);
+		controller.addTextoDocumento("Titulo1", "Valor", 1);
 		assertEquals("Valor", controller.exibirDocumento("Titulo1")[0]);
 	}
 	
@@ -197,7 +197,7 @@ class DocumentoControllerTest {
 		
 		Documento documentoComparado = new Documento("Titulo1");
 		
-		assertTrue(documentoComparado.equals(controller.getDocumento("Titulo1")));
+		assertTrue(documentoComparado.equals(controller.acessaDocumento("Titulo1")));
 	}
 	
 	@Test

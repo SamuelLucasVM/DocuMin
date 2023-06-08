@@ -1,5 +1,11 @@
 package documento;
 
+/**
+ * Classe que gerencia as requisições do sistema para as operações de documentos, 
+ * tratando funcionalidades de armazenamento, de requisição de documentos e gerenciando
+ * requisições aos métodos de documento.
+ */
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -43,19 +49,13 @@ public class DocumentoController {
 		return repositorio.get(titulo).getDocumento();
 	}
 	
-	public Documento getDocumento(String titulo) {
-		if (composedOfSpaces(titulo) || titulo == "") throw new IllegalArgumentException("Título vazio");
-		
-		return repositorio.get(titulo);
-	}
-	
 	public int addAtalho(String tituloDoc, String tituloDocReferenciado) {
 		if (composedOfSpaces(tituloDoc) || tituloDoc == "") throw new IllegalArgumentException("Título vazio");
 		if (composedOfSpaces(tituloDocReferenciado) || tituloDocReferenciado == "") throw new IllegalArgumentException("Título vazio");
 		
 		if (repositorio.get(tituloDoc).haveDoc()) throw new IllegalStateException("Documento possui atalho");
 		
-		Documento docReferenciado = getDocumento(tituloDocReferenciado);
+		Documento docReferenciado = acessaDocumento(tituloDocReferenciado);
 		
 		int prioridade = getMediaPrioridades(docReferenciado.getElementos());
 		String valor = tituloDocReferenciado;
@@ -63,7 +63,7 @@ public class DocumentoController {
 		propriedades.put("representacaoCompleta", criaRepresentacaoCompletaAtalho(docReferenciado.getElementos()));
 		propriedades.put("representacaoResumido", criaRepresentacaoResumidaAtalho(docReferenciado.getElementos()));
 		
-		return getDocumento(tituloDoc).addAtalho(prioridade, valor, propriedades);
+		return acessaDocumento(tituloDoc).addAtalho(prioridade, valor, propriedades);
 	}
 	
 	private boolean composedOfSpaces(String str) {
@@ -85,6 +85,12 @@ public class DocumentoController {
 		media = media != 0 ? media / elementos.size() : 0;
 		
 		return media;
+	}
+	
+	public Documento acessaDocumento(String titulo) {
+		if (composedOfSpaces(titulo) || titulo == "") throw new IllegalArgumentException("Título vazio");
+		
+		return repositorio.get(titulo);
 	}
 	
 	private String criaRepresentacaoCompletaAtalho(ArrayList<Elemento> elementos) {
@@ -109,5 +115,57 @@ public class DocumentoController {
 		}
 		
 		return response;
+	}
+	
+	public int getQtdeElementosDocumento(String idDocumento) {
+		return acessaDocumento(idDocumento).getQtdeElementos();
+	}
+	
+	public String[] getDocumento(String idDocumento) {
+		return acessaDocumento(idDocumento).getDocumento();
+	}
+	
+	public int addTextoDocumento(String idDocumento, String valor, int prioridade) {
+		return acessaDocumento(idDocumento).addTexto(valor, prioridade);
+	}
+	
+	public int addTituloDocumento(String idDocumento, String valor, int prioridade, int nivel, boolean linkavel) {
+		return acessaDocumento(idDocumento).addTitulo(valor, prioridade, nivel, linkavel);
+	}
+	
+	public int addListaDocumento(String idDocumento, String valorLista, int prioridade, String separador, String charLista) {
+		return acessaDocumento(idDocumento).addLista(valorLista, prioridade, separador, charLista);
+	}
+	
+	public int addTermosDocumento(String idDocumento, String valorTermos, int prioridade, String separador, String ordem) {
+		return acessaDocumento(idDocumento).addTermos(valorTermos, prioridade, separador, ordem);
+	}
+	
+	public String getRepresentacaoCompletaDocumento(String idDocumento, int posicao) {
+		return acessaDocumento(idDocumento).getRepresentacaoCompleta(posicao);
+	}
+	
+	public String getRepresentacaoResumidaDocumento(String idDocumento, int posicao) {
+		return acessaDocumento(idDocumento).getRepresentacaoResumida(posicao);
+	}
+	
+	public void elevaElementoDocumento(String idDocumento, int posicao) {
+		acessaDocumento(idDocumento).elevaElemento(posicao);
+	}
+	
+	public void cedeElementoDocumento(String idDocumento, int posicao) {
+		acessaDocumento(idDocumento).cedeElemento(posicao);
+	}
+	
+	public Elemento getElementoDocumento(String idDocumento, int posicao) {
+		return acessaDocumento(idDocumento).getElemento(posicao);
+	}
+	
+	public ArrayList<Elemento> getElementosDocumento(String idDocumento) {
+		return acessaDocumento(idDocumento).getElementos();
+	}
+	
+	public boolean removeElementoDocumento(String idDocumento, int posicao) {
+		return acessaDocumento(idDocumento).removeElemento(posicao);
 	}
 }
