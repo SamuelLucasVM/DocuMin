@@ -2,7 +2,8 @@ package visao;
 
 /**
  * Interface que será superclasse dos outros tipos de visão,
- * possuindo o método comum a todos "exibirVisao".
+ * possuindo o método comum a todos "exibirVisao" que serão
+ * herdados pelas suas subclasses
  * @author Samuel Lucas Vieira Matos
  */
 
