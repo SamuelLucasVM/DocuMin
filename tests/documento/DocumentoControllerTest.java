@@ -97,7 +97,7 @@ class DocumentoControllerTest {
 		
 		controller.removerDocumento("Titulo1");
 		try {
-			controller.getDocumento("Titulo1");
+			controller.acessaDocumento("Titulo1");
 			fail("Não deveria encontrar um documento que foi apagado");
 		} catch (NoSuchElementException nsee) {
 			assertEquals("Elemento não encontrado", nsee.getMessage());
@@ -137,7 +137,7 @@ class DocumentoControllerTest {
 	@Test
 	void getQtdeElementosTest() {
 		controller.addDocumento("Titulo1");
-		assertEquals(0, controller.getQtdeElementosDocumento("Titulo1"));
+		assertEquals(0, controller.getQtdeElementos("Titulo1"));
 		controller.addTextoDocumento("Titulo1", "Valor", 1);
 		assertEquals(1, controller.getQtdeElementos("Titulo1"));
 	}
@@ -212,7 +212,7 @@ class DocumentoControllerTest {
 	}
 	
 	@Test
-	void getDocumentoTest() {
+	void acessaDocumentoTest() {
 		controller.addDocumento("Titulo1");
 		
 		Documento documentoComparado = new Documento("Titulo1");
@@ -221,9 +221,9 @@ class DocumentoControllerTest {
 	}
 	
 	@Test
-	void getDocumentoVazioTest() {
+	void acessaDocumentoVazioTest() {
 		try {
-			controller.getDocumento("");
+			controller.acessaDocumento("");
 			fail("Deveria quebrar ao passar um titulo vazio");
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Título vazio", iae.getMessage());
@@ -233,7 +233,7 @@ class DocumentoControllerTest {
 	@Test
 	void getDocumentoCompostoPorEspacoTest() {
 		try {
-			controller.getDocumento("     ");
+			controller.acessaDocumento("     ");
 			fail("Deveria quebrar ao passar um titulo composto por espaços");
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Título vazio", iae.getMessage());
@@ -243,7 +243,7 @@ class DocumentoControllerTest {
 	@Test
 	void getDocumentoInexistenteTest() {
 		try {
-			controller.getDocumento("Titulo1");
+			controller.acessaDocumento("Titulo1");
 			fail("Deveria quebrar ao passar um titulo de um documento inexistente");
 		} catch (NoSuchElementException nsee) {
 			assertEquals("Elemento não encontrado", nsee.getMessage());
