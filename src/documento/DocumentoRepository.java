@@ -21,7 +21,7 @@ public class DocumentoRepository {
 	public boolean add(String titulo, int tamanhoMaximo) {
 		if (documentos.containsKey(titulo)) return false;
 		
-		Documento doc = new Documento(titulo);
+		Documento doc = new Documento(titulo, tamanhoMaximo);
 		documentos.put(titulo, doc);
 		return true;
 	}

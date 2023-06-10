@@ -22,6 +22,12 @@ class DocumentoTest {
 	}
 	
 	@Test
+	void prepareDocumentoComTamanhoIndefinido() {
+		Documento documentoTamanhoIndefinido = new Documento("Titulo1");
+		assertEquals(-1, documentoTamanhoIndefinido.getTamanho());
+	}
+	
+	@Test
 	void getQtdeElementosTest() {
 		assertEquals(0, documento.getQtdeElementos());
 		documento.addTexto("Valor", 1);
@@ -65,6 +71,23 @@ class DocumentoTest {
 	}
 
 	@Test
+	void addTituloNivelInvalidoTest() {
+		try {
+			assertEquals(1,documento.addTitulo("Valor", 1, 0, true));
+			fail("Deveria quebrar ao adicionar um titulo com nível inválido");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Nível inválido", iae.getMessage());
+		}
+		
+		try {
+			assertEquals(1,documento.addTitulo("Valor", 1, 6, true));
+			fail("Deveria quebrar ao adicionar um titulo com nível inválido");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Nível inválido", iae.getMessage());
+		}
+	}
+	
+	@Test
 	void addTituloSemEspacoTest() {
 		documento.addTexto("Valor", 1);
 		documento.addTitulo("Valor", 1, 1, true);
@@ -105,6 +128,16 @@ class DocumentoTest {
 	}
 	
 	@Test
+	void addTermosOrdemInexistenteTest() {
+		try {
+			documento.addTermos("Valor", 1, "/", "OrdemMassa");
+			fail("Não deveria adicionar um termo com ordem inválida");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Ordem não existe", iae.getMessage());
+		}
+	}
+	
+	@Test
 	void addTermosSemEspacoTest() {
 		documento.addTexto("Valor", 1);
 		documento.addTitulo("Valor", 1, 1, true);
@@ -123,84 +156,84 @@ class DocumentoTest {
 	void getRepresentacaoCompletaTextoTest() {
 		documento.addTexto("Valor", 1);
 	
-		assertEquals("Valor",documento.getElemento(1).exibirCompleto());
+		assertEquals("Valor",documento.getRepresentacaoCompleta(1));
 	}
 	
 	@Test
 	void getRepresentacaoResumidaTextoTest() {
 		documento.addTexto("Valor", 1);
 		
-		assertEquals("Valor", documento.getElemento(1).exibirResumido());
+		assertEquals("Valor", documento.getRepresentacaoResumida(1));
 	}
 	
 	@Test
 	void getRepresentacaoCompletaTituloTest() {
 		documento.addTitulo("Valor1", 1, 1, true);
 		
-		assertEquals("1. Valor1 -- VALOR1", documento.getElemento(1).exibirCompleto());
+		assertEquals("1. Valor1 -- VALOR1", documento.getRepresentacaoCompleta(1));
 	}
 	
 	@Test
 	void getRepresentacaoResumidaTituloTest() {
 		documento.addTitulo("Valor1", 1, 1, true);
 		
-		assertEquals("1. Valor1", documento.getElemento(1).exibirResumido());
+		assertEquals("1. Valor1", documento.getRepresentacaoResumida(1));
 	}
 	
 	@Test
 	void getRepresentacaoCompletaListaTest() {
 		documento.addLista("Valor/Separado", 1, "/", "-");
 
-		assertEquals("- Valor\n- Separado", documento.getElemento(1).exibirCompleto());
+		assertEquals("- Valor\n- Separado", documento.getRepresentacaoCompleta(1));
 	}
 	
 	@Test
 	void getRepresentacaoResumidaListaTest() {
 		documento.addLista("Valor/Separado", 1, "/", "-");
 
-		assertEquals("Valor/Separado", documento.getElemento(1).exibirResumido());
+		assertEquals("Valor/Separado", documento.getRepresentacaoResumida(1));
 	}
 	
 	@Test
 	void getRepresentacaoCompletaTermosNenhumaOrdenacaoTest() {
 		documento.addTermos("Casa/Bolo/Amor", 1, "/", "NENHUM");
 		
-		assertEquals("Total de Termos: 3\n- Casa, Bolo, Amor", documento.getElemento(1).exibirCompleto());
+		assertEquals("Total de Termos: 3\n- Casa, Bolo, Amor", documento.getRepresentacaoCompleta(1));
 	}
 	
 	@Test
 	void getRepresentacaoResumidaTermosNenhumaOrdenacaoTest() {
 		documento.addTermos("Casa/Bolo/Amor", 1, "/", "NENHUM");
 		
-		assertEquals("Casa / Bolo / Amor", documento.getElemento(1).exibirResumido());
+		assertEquals("Casa / Bolo / Amor", documento.getRepresentacaoResumida(1));
 	}
 	
 	@Test
 	void getRepresentacaoCompletaTermosOrdemAlfabeticaTest() {
 		 documento.addTermos("Casa/Bolo/Amor", 1, "/", "ALFABETICA");
 		
-		assertEquals("Total de Termos: 3\n- Amor, Bolo, Casa", documento.getElemento(1).exibirCompleto());
+		assertEquals("Total de Termos: 3\n- Amor, Bolo, Casa", documento.getRepresentacaoCompleta(1));
 	}
 	
 	@Test
 	void getRepresentacaoResumidaTermosOrdemAlfabeticaTest() {
 		documento.addTermos("Casa/Bolo/Amor", 1, "/", "ALFABETICA");
 		
-		assertEquals("Amor / Bolo / Casa", documento.getElemento(1).exibirResumido());
+		assertEquals("Amor / Bolo / Casa", documento.getRepresentacaoResumida(1));
 	}
 	
 	@Test
 	void getRepresentacaoCompletaTermosOrdemTamanhoTest() {
 		documento.addTermos("Casarao/Bolo Grande/Amor", 1, "/", "TAMANHO");
 
-		assertEquals("Total de Termos: 3\n- Bolo Grande, Casarao, Amor", documento.getElemento(1).exibirCompleto());
+		assertEquals("Total de Termos: 3\n- Bolo Grande, Casarao, Amor", documento.getRepresentacaoCompleta(1));
 	}
 	
 	@Test
 	void getRepresentacaoResumidaTermosOrdemTamanhoTest() {
 		documento.addTermos("Casarao/Bolo Grande/Amor", 1, "/", "TAMANHO");
 		
-		assertEquals("Bolo Grande / Casarao / Amor", documento.getElemento(1).exibirResumido());
+		assertEquals("Bolo Grande / Casarao / Amor", documento.getRepresentacaoResumida(1));
 	}
 	
 	@Test
@@ -413,6 +446,12 @@ class DocumentoTest {
 		} catch (IndexOutOfBoundsException iobe) {
 			assertEquals("Posição inválida", iobe.getMessage());
 		}
+	}
+	
+	@Test
+	void removeElementoPosicaoInvalidaTest() {
+		assertFalse(documento.removeElemento(0));
+		assertFalse(documento.removeElemento(1));
 	}
 	
 	@Test

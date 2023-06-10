@@ -55,6 +55,26 @@ class DocumentoControllerTest {
 	}
 	
 	@Test
+	void addDocumentoComTamanhoMaximoVazioTest() {
+		try {
+			controller.addDocumento("", 2);
+			fail("Deveria quebrar ao passar um titulo vazio");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Título vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	void addDocumentoComTamanhoMaximoCompostoPorEspacoTest() {
+		try {
+			controller.addDocumento("     ", 2);
+			fail("Deveria quebrar ao passar um titulo composto por espaços");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Título vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
 	public void addDocumentoComTamanhoMaximoInvalidoTest() {
 		try {
 			controller.addDocumento("Titulo", 0);
@@ -239,6 +259,21 @@ class DocumentoControllerTest {
 	}
 	
 	@Test
+	void addAtalhoTamanhoLimiteAtingidoTest() {
+		controller.addDocumento("Titulo1", 1);
+		
+		controller.addTextoDocumento("Titulo1", "Valor", 1);
+		controller.addDocumento("Titulo2", 2);
+		
+		try {
+			controller.addAtalho("Titulo1", "Titulo2");
+			fail("Deveria quebrar pois não há espaço para o atalho nos elementos do documento");
+		} catch (IndexOutOfBoundsException iobe) {
+			assertEquals("Tamanho limite atingido", iobe.getMessage());
+		}
+	}
+	
+	@Test
 	void addAtalhoDocumentoPossuiAtalhoTest() {
 		controller.addDocumento("Titulo1", 1);
 		controller.addDocumento("Titulo2", 2);
@@ -313,6 +348,26 @@ class DocumentoControllerTest {
 			fail("Deveria quebrar ao passar um titulo de um documento inexistente");
 		} catch (NoSuchElementException nsee) {
 			assertEquals("Elemento não encontrado", nsee.getMessage());
+		}
+	}
+	
+	@Test
+	void acessaDocumentoTituloVazioTest() {
+		try {
+			controller.acessaDocumento("");
+			fail("Deveria quebrar ao passar um titulo vazio");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Título vazio", iae.getMessage());
+		}
+	}
+
+	@Test
+	void acessaDocumentoTituloCompostPorEspacosTest() {
+		try {
+			controller.acessaDocumento("     ");
+			fail("Deveria quebrar ao passar um titulo vazio");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Título vazio", iae.getMessage());
 		}
 	}
 }

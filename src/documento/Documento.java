@@ -10,11 +10,28 @@ import elemento.Termos;
 import elemento.Texto;
 import elemento.Titulo;
 
+/**
+ * Classe que possui, retorna e manipula o armazenamento
+ * de seus Elementos, sendo a classe que é requisitada
+ * quando há uma operação sobre um Elemento no sistema
+ * @author Samuel Lucas Vieira Matos
+ */
+
 public class Documento {
 	private String titulo;
 	private ArrayList<Elemento> elementos;
 	private int tamanho;
 	private boolean haveDoc;
+	
+	/**
+	 * Construtor de Documento, que recebe o titulo e a
+	 * quantidade máxima de elementos que o Documento
+	 * pode possuir
+	 * @param titulo Nome do Documento que será referenciado
+	 * no sistema
+	 * @param tamanho Tamanho máximo de armazenamento
+	 * de Elementos no Documento
+	 */
 	
 	public Documento(String titulo, int tamanho) {
 		this.titulo = titulo;
@@ -23,13 +40,47 @@ public class Documento {
 		this.haveDoc = false;
 	}
 	
+	/**
+	 * Construtor de Documento, que recebe somente o 
+	 * titulo do Documento, deixando o tamanho como -1
+	 * que será uma sinalização de quantidade infinita possível
+	 * para o armazenamento de Elementos
+	 * @param titulo Nome do Documento que será referenciado
+	 * no sistema
+	 */
+	
 	public Documento(String titulo) {
 		this(titulo, -1);
 	}
 	
+	/**
+	 * Método que retorna a qtdeMaxima de Elementos
+	 * que o Documento pode possuir
+	 * @return int QtdeMaxima de Elementos que o 
+	 * Documento pode possuir
+	 */
+	
+	public int getTamanho() {
+		return this.tamanho;
+	}
+	
+	/**
+	 * Método que retorna a quantidade de Elementos 
+	 * cadastrados no Documento
+	 * @return int Quantidade de Elementos
+	 */
+
 	public int getQtdeElementos() {
 		return this.elementos.size();
 	}
+	
+	/**
+	 * Método que retornará a representação resumida
+	 * de todos os Elementos presentes no Documento
+	 * através de um array de Strings
+	 * @return String[] Array de representações resumidas
+	 * dos elementos do Documento
+	 */
 	
 	public String[] getDocumento() {
 		String[] stringsElementos = new String[elementos.size()];
@@ -41,6 +92,14 @@ public class Documento {
 		return stringsElementos;
 	}
 	
+	/**
+	 * Método que adiciona um Texto no Documento, passando o valor
+	 * do Texto e a sua prioridade
+	 * @param valor Valor do Texto
+	 * @param prioridade Prioridade do Texto
+	 * @return int Posição do Elemento adicionado no seu armazenamento
+	 */
+	
 	public int addTexto(String valor, int prioridade) {
 		if (elementos.size() == tamanho) throw new IndexOutOfBoundsException("Tamanho limite atingido");
 		
@@ -49,6 +108,16 @@ public class Documento {
 		
 		return elementos.size();
 	}
+	
+	/**
+	 * Método que adiciona um Titulo no documento, passando o valor,
+	 * a prioridade, o nivel e um booleano linkavel
+	 * @param valor Valor do Titulo
+	 * @param prioridade Prioridade do Titulo
+	 * @param nivel Nivel do Titulo
+	 * @param linkavel Booleano que indica se o Titulo é linkável ou não
+	 * @return int Posição do Elemento adicionado no seu armazenamento
+	 */
 	
 	public int addTitulo(String valor, int prioridade, int nivel, boolean linkavel) {
 		if (nivel <= 0 || nivel > 5) throw new IllegalArgumentException("Nível inválido");
@@ -64,6 +133,18 @@ public class Documento {
 		return elementos.size();
 	}
 	
+	/**
+	 * Método que adiciona uma Lista no documento, passando o valor,
+	 * a prioridade, o separador e o caracter de separação da Lista
+	 * @param valor Valor do Titulo
+	 * @param prioridade Prioridade do Titulo
+	 * @param separador Caracter que indicará a separação do valor
+	 * em pedaços
+	 * @param charLista Caracter que servirá para a apresentação do 
+	 * Elemento Lista
+	 * @return int Posição do Elemento adicionado no seu armazenamento
+	 */
+	
 	public int addLista(String valorLista, int prioridade, String separador, String charLista) {
 		if (elementos.size() == tamanho) throw new IndexOutOfBoundsException("Tamanho limite atingido");
 		
@@ -76,6 +157,18 @@ public class Documento {
 		
 		return elementos.size();
 	}
+	
+	/**
+	 * Método que adiciona um Elemento Termos no documento, passando
+	 * o valor, a prioridade, o separador e a ordem dos Termos
+	 * @param valor Valor do Titulo
+	 * @param prioridade Prioridade do Titulo
+	 * @param separador Caracter que indicará a separação do valor
+	 * em pedaços
+	 * @param ordem Ordem em que os Termos irão ser representados
+	 * podendo ser por ordem alfabética, de tamanho ou sem ordem
+	 * @return int Posição do Elemento adicionado no seu armazenamento
+	 */
 	
 	public int addTermos(String valorTermos, int prioridade, String separador, String ordem) {
 		if (ordem != "NENHUM" && ordem != "ALFABETICA" && ordem != "TAMANHO") throw new IllegalArgumentException("Ordem não existe");
@@ -90,14 +183,36 @@ public class Documento {
 		
 		return elementos.size();
 	}
-	
+
+	/**
+	 * Método que retornará uma String da representação completa
+	 * de um Elemento
+	 * @param posicao Posição do Elemento que a requisição pede
+	 * para exibir 
+	 * @return String Representação completa do Elemento 
+	 */
+
 	public String getRepresentacaoCompleta(int posicao) {
-		return elementos.get(posicao).exibirCompleto();
+		return elementos.get(posicao - 1).exibirCompleto();
 	}
+	
+	/**
+	 * Método que retornará uma String da representação resumida
+	 * de um Elemento
+	 * @param posicao Posição do Elemento que a requisição pede
+	 * para exibir 
+	 * @return String Representação resumida do Elemento 
+	 */
 	
 	public String getRepresentacaoResumida(int posicao) {
-		return elementos.get(posicao).exibirResumido();
+		return elementos.get(posicao - 1).exibirResumido();
 	}
+	
+	/**
+	 * Método que eleva um Elemento em sua posição no armazenamento
+	 * de Elementos 
+	 * @param posicao Posicao do Elemento que será elevado
+	 */
 	
 	public void elevaElemento(int posicao) {
 		if (posicao <= 0 || posicao > elementos.size()) throw new IndexOutOfBoundsException("Posição inválida");
@@ -109,6 +224,12 @@ public class Documento {
 		}
 	}
 	
+	/**
+	 * Método que cede um Elemento em sua posição no armazenamento
+	 * de Elementos 
+	 * @param posicao Posicao do Elemento que será cedido
+	 */
+	
 	public void cedeElemento(int posicao) {
 		if (posicao <= 0 || posicao > elementos.size()) throw new IndexOutOfBoundsException("Posição inválida");
 		
@@ -119,15 +240,36 @@ public class Documento {
 		}
 	}
 	
+	/**
+	 * Método que retorna o Elemento na posição indicada
+	 * @param posicao Posicao do Elemento que será retornado
+	 * @return Elemento Elemento requisitado
+	 */
+	
 	public Elemento getElemento(int posicao) {
 		if (posicao <= 0 || posicao > elementos.size()) throw new IndexOutOfBoundsException("Posição inválida");
 		
 		return elementos.get(posicao - 1);
 	}
 	
+	/**
+	 * Método que retorna todos os Elementos do Documento
+	 * @return ArrayList<Elemento> Elementos do Documento
+	 * requisitado
+	 */
+	
 	public ArrayList<Elemento> getElementos() {
 		return elementos;
 	}
+	
+	/**
+	 * Método que remove o Elemento na posição indicada e
+	 * da um Shift nos seus sucessores para que não haja
+	 * nenhum vazio entre os Elementos
+	 * @param posicao Posicao do Elemento que será removido
+	 * @return boolean Boolean indicando se houve a remoção
+	 * do Elemento
+	 */
 	
 	public boolean removeElemento(int posicao) {
 		if (posicao <= 0 || posicao > elementos.size()) return false;
@@ -136,6 +278,18 @@ public class Documento {
 
 		return true;
 	}
+	
+	/**
+	 * Método que adiciona um atalho no Documento, verificando 
+	 * antes se já um atalho nesse Documento e se a quantidade
+	 * de Elementos total já foi atingida
+	 * @param prioridade Prioridade do Atalho
+	 * @param valor Valor do Atalho
+	 * @param propriedades Propriedades do Atalho, possuindo 
+	 * as representações completas e resumidas
+	 * @return int Posicao do Elemento no armazenamento de Elementos
+	 * no Documento
+	 */
 	
 	public int addAtalho(int prioridade, String valor, HashMap<String, String> propriedades) {
 		if (elementos.size() == tamanho) throw new IndexOutOfBoundsException("Tamanho limite atingido");
@@ -149,9 +303,21 @@ public class Documento {
 		return elementos.size();
 	}
 	
+	/**
+	 * Método que retorna se já há ou não um atalho adicionado
+	 * nos Elementos do Documento
+	 * @return boolean Boolean que indica se há ou não um Atalho
+	 * entre os Elementos do Documento
+	 */
+	
 	public boolean haveDoc() {
 		return haveDoc;
 	}
+	
+	/**
+	 * Método que retorna o título do Documento
+	 * @return String Título do Documento
+	 */
 	
 	public String getTitulo() {
 		return titulo;

@@ -1,16 +1,17 @@
 package documento;
 
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import elemento.Elemento;
+
 /**
  * Classe Controller que gerencia as requisições do sistema para as operações de documentos, 
  * tratando funcionalidades de armazenamento, de requisição de documentos e gerenciando
  * requisições aos métodos de documento.
  * @author Samuel Lucas Vieira Mato
  */
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import elemento.Elemento;
 
 public class DocumentoController {
 	private DocumentoRepository repositorio;
@@ -67,55 +68,10 @@ public class DocumentoController {
 		return acessaDocumento(tituloDoc).addAtalho(prioridade, valor, propriedades);
 	}
 	
-	private boolean composedOfSpaces(String str) {
-		for (int i = 0; i < str.length(); i++) {
-			if (str.charAt(i) != ' ') {
-				return false;
-			}
-		}
-		return true;
-	}
-	
-	private int getMediaPrioridades(ArrayList<Elemento> elementos) {
-		int media = 0;
-		
-		for (Elemento elemento : elementos) {
-			media += elemento.getPrioridade();
-		}
-		
-		media = media != 0 ? media / elementos.size() : 0;
-		
-		return media;
-	}
-	
 	public Documento acessaDocumento(String titulo) {
 		if (composedOfSpaces(titulo) || titulo == "") throw new IllegalArgumentException("Título vazio");
 		
 		return repositorio.get(titulo);
-	}
-	
-	private String criaRepresentacaoCompletaAtalho(ArrayList<Elemento> elementos) {
-		String response = "";
-		
-		for (Elemento elemento : elementos) {
-			if (elemento.getPrioridade() == 4 || elemento.getPrioridade() == 5) {
-				response += elemento.exibirCompleto() + "\n";
-			}
-		}
-		
-		return response;
-	}
-	
-	private String criaRepresentacaoResumidaAtalho(ArrayList<Elemento> elementos) {
-		String response = "";
-		
-		for (Elemento elemento : elementos) {
-			if (elemento.getPrioridade() == 4 || elemento.getPrioridade() == 5) {
-				response += elemento.exibirResumido() + "\n";
-			}
-		}
-		
-		return response;
 	}
 	
 	public int getQtdeElementosDocumento(String idDocumento) {
@@ -168,5 +124,50 @@ public class DocumentoController {
 	
 	public boolean removeElementoDocumento(String idDocumento, int posicao) {
 		return acessaDocumento(idDocumento).removeElemento(posicao);
+	}
+	
+	private boolean composedOfSpaces(String str) {
+		for (int i = 0; i < str.length(); i++) {
+			if (str.charAt(i) != ' ') {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private int getMediaPrioridades(ArrayList<Elemento> elementos) {
+		int media = 0;
+		
+		for (Elemento elemento : elementos) {
+			media += elemento.getPrioridade();
+		}
+		
+		media = media != 0 ? media / elementos.size() : 0;
+		
+		return media;
+	}
+	
+	private String criaRepresentacaoCompletaAtalho(ArrayList<Elemento> elementos) {
+		String response = "";
+		
+		for (Elemento elemento : elementos) {
+			if (elemento.getPrioridade() == 4 || elemento.getPrioridade() == 5) {
+				response += elemento.exibirCompleto() + "\n";
+			}
+		}
+		
+		return response;
+	}
+	
+	private String criaRepresentacaoResumidaAtalho(ArrayList<Elemento> elementos) {
+		String response = "";
+		
+		for (Elemento elemento : elementos) {
+			if (elemento.getPrioridade() == 4 || elemento.getPrioridade() == 5) {
+				response += elemento.exibirResumido() + "\n";
+			}
+		}
+		
+		return response;
 	}
 }
